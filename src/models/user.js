@@ -297,7 +297,8 @@ var UserSchema = new Schema({
     advancedCollapsed: {type: Boolean, 'default': false},
     toolbarCollapsed: {type:Boolean, 'default':false},
     background: String,
-    webhooks: {type: Schema.Types.Mixed, 'default': {}}
+    webhooks: {type: Schema.Types.Mixed, 'default': {}},
+    emailNotifications: {type: Schema.Types.Mixed, 'default': {}}
   },
   profile: {
     blurb: String,
