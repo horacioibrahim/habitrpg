@@ -96,7 +96,7 @@ exports.cancelSubscription = function(data, cb) {
   p.extraMonths = 0; // clear extra time. If they subscribe again, it'll be recalculated from p.dateTerminated
 
   data.user.save(cb);
-  if(isProduction) utils.txnEmail(data.user, 'cancel-subscription');
+  utils.txnEmail(data.user, 'cancel-subscription');
   utils.ga.event('unsubscribe', data.paymentMethod).send();
 }
 

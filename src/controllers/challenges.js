@@ -336,7 +336,7 @@ api.selectWinner = function(req, res, next) {
       winner.save(cb);
     },
     function(saved, num, cb) {
-      if(saved.preferences.emailNotifications.wonChallenge){
+      if(saved.preferences.emailNotifications.wonChallenge !== false){
         utils.txnEmail(saved, 'won-challenge', [
           {name: 'CHALLENGE_NAME', content: chal.name}
         ]);

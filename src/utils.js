@@ -45,7 +45,7 @@ function getUserInfo(user, fields) {
   }
 
   if(fields.indexOf('canSend') != -1){
-    info.canSend = !user.preferences.emailNotifications.unsubscribeFromAll;
+    info.canSend = user.preferences.emailNotifications.unsubscribeFromAll !== false;
   }
 
   return info;

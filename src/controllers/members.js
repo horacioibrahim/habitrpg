@@ -69,7 +69,7 @@ api.sendPrivateMessage = function(req, res, next){
   ], function(err){
     if (err) return sendErr(err, res, next);
 
-    if(fetchedMember.preferences.emailNotifications.newPM){
+    if(fetchedMember.preferences.emailNotifications.newPM !== false){
       utils.txnEmail(fetchedMember, 'new-pm', [
         {name: 'SENDER', content: utils.getUserInfo(res.locals.user, ['name']).name},
         {name: 'PMS_INBOX_URL', content: nconf.get('BASE_URL') + '/#/options/groups/inbox'}

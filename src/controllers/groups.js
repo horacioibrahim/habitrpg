@@ -301,13 +301,11 @@ api.flagChatMessage = function(req, res, next){
     group.markModified('chat');
     group.save(function(err,_saved){
       if(err) return next(err);
-      if (isProd){
-
         var addressesToSendTo = JSON.parse(nconf.get('FLAG_REPORT_EMAIL'));
         
         if(Array.isArray(addressesToSendTo)){
           addressesToSendTo = addressesToSendTo.map(function(email){
-            return {email: email}
+            return {email: email, canSend: true}
           });
         }else{
           addressesToSendTo = {email: addressesToSendTo}
@@ -332,7 +330,7 @@ api.flagChatMessage = function(req, res, next){
           {name: "GROUP_ID", content: group._id},
           {name: "GROUP_URL", content: group._id == 'habitrpg' ? (nconf.get('BASE_URL') + '/#/options/groups/tavern') : (group.type === 'guild' ? (nconf.get('BASE_URL')+ '/#/options/groups/guilds/' + group._id) : 'party')},
         ]);
-      }
+
       return res.send(204);
     });
   });
