@@ -96,6 +96,12 @@ api.sendGift = function(req, res, next){
           member.balance += amt;
           user.balance -= amt;
           api.sendMessage(user, member, req.body);
+          if(member.preferences.emailNotifications.giftedGems !== false){
+            utils.txnEmail(member, 'gifted-gems', [
+              {name: 'GIFTER', content: utils.getUserInfo(user, ['name']).name},
+              {name: 'X_GEMS_GIFTED', content: amt}
+            ]);
+          }
           return async.parallel([
             function (cb2) { member.save(cb2) },
             function (cb2) { user.save(cb2) }

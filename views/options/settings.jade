@@ -264,6 +264,11 @@ script(id='partials/options.settings.notifications.html', type="text/ng-template
                 input(type='checkbox', ng-model='user.preferences.emailNotifications.wonChallenge', ng-change='set({"preferences.emailNotifications.wonChallenge": user.preferences.emailNotifications.wonChallenge ? true: false})')
                 span=env.t('wonChallenge')
 
+            .checkbox
+              label
+                input(type='checkbox', ng-model='user.preferences.emailNotifications.giftedGems', ng-change='set({"preferences.emailNotifications.giftedGems": user.preferences.emailNotifications.giftedGems ? true: false})')
+                span=env.t('giftedGems')
+
             hr
 
             .checkbox

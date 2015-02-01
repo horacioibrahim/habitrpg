@@ -110,7 +110,15 @@ exports.buyGems = function(data, cb) {
     //TODO ga.transaction to reflect whether this is gift or self-purchase
     utils.ga.transaction(data.user._id, amt).item(amt, 1, data.paymentMethod.toLowerCase() + "-checkout", "Gems > " + data.paymentMethod).send();
   }
-  if (data.gift) members.sendMessage(data.user, data.gift.member, data.gift);
+  if (data.gift){
+    members.sendMessage(data.user, data.gift.member, data.gift);
+    if(data.gift.member.preferences.emailNotifications.giftedGems !== false){
+      utils.txnEmail(member, 'gifted-gems', [
+        {name: 'GIFTER', content: utils.getUserInfo(data.user, ['name']).name},
+        {name: 'X_GEMS_GIFTED', content: amt}
+      ]);
+    }
+  }
   async.parallel([
     function(cb2){data.user.save(cb2)},
     function(cb2){data.gift ? data.gift.member.save(cb2) : cb2(null);}
