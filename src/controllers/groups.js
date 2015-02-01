@@ -561,13 +561,13 @@ api.invite = function(req, res, next) {
 
           if(group.type == 'guild'){
             emailVars.push(
-              {name: 'GUILD_NAME': content: group.name},
-              {name: 'GUILD_URL': content: nconf.get('BASE_URL') + '/#/options/groups/guilds/' + group._id}
+              {name: 'GUILD_NAME', content: group.name},
+              {name: 'GUILD_URL', content: nconf.get('BASE_URL') + '/#/options/groups/guilds/' + group._id}
             );
           }else{
             emailVars.push(
-              {name: 'PARTY_NAME': content: group.name},
-              {name: 'PARTY_URL': content: nconf.get('BASE_URL') + '/#/options/groups/party'}
+              {name: 'PARTY_NAME', content: group.name},
+              {name: 'PARTY_URL', content: nconf.get('BASE_URL') + '/#/options/groups/party'}
             )
           }
 
