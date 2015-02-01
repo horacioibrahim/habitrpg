@@ -284,11 +284,14 @@ script(id='partials/options.settings.notifications.html', type="text/ng-template
                 input(type='checkbox', ng-model='user.preferences.emailNotifications.invitedGuild', ng-change='set({"preferences.emailNotifications.invitedGuild": user.preferences.emailNotifications.invitedGuild ? true: false})')
                 span=env.t('invitedGuild')
 
-            hr
+            .checkbox
+              label
+                input(type='checkbox', ng-model='user.preferences.emailNotifications.remindersToLogin', ng-change='set({"preferences.emailNotifications.remindersToLogin": user.preferences.emailNotifications.remindersToLogin ? true: false})')
+                span=env.t('remindersToLogin')
 
             .checkbox
               label
-                input(type='checkbox', ng-model='user.preferences.emailNotifications.others', ng-change='set({"preferences.emailNotifications.others": user.preferences.emailNotifications.others ? true: false})')
+                input(type='checkbox', ng-model='user.preferences.emailNotifications.importantAnnouncements', ng-change='set({"preferences.emailNotifications.importantAnnouncements": user.preferences.emailNotifications.importantAnnouncements ? true: false})')
                 span=env.t('importantAnnouncements')
             
             hr

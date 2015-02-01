@@ -302,13 +302,14 @@ var UserSchema = new Schema({
     // As users who didn't login after these were introduced may have them undefined/null
     emailNotifications: {
       unsubscribeFromAll: {type: Boolean, 'default': false},
-      //others: {type: Boolean, 'default': true},
       newPM: {type: Boolean, 'default': true},
       wonChallenge: {type: Boolean, 'default': true},
       giftedGems: {type: Boolean, 'default': true},
       giftedSubscription: {type: Boolean, 'default': true},
       invitedParty: {type: Boolean, 'default': true},
-      invitedGuild: {type: Boolean, 'default': true}
+      invitedGuild: {type: Boolean, 'default': true},
+      remindersToLogin: {type: Boolean, 'default': true},
+      importantAnnouncements: {type: Boolean, 'default': true}
     }
   },
   profile: {
