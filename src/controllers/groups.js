@@ -554,6 +554,26 @@ api.invite = function(req, res, next) {
       ], function(err, results){
         if (err) return next(err);
 
+        if(invite.preferences.emailNotifications['invited' + (group.type == 'guild' ? 'Guild' : 'Party')] !== false){
+          var emailVars = [
+            {name: 'INVITER', content: utils.getUserInfo(res.locals.user, ['name']).name}
+          ];
+
+          if(group.type == 'guild'){
+            emailVars.push(
+              {name: 'GUILD_NAME': content: group.name},
+              {name: 'GUILD_URL': content: nconf.get('BASE_URL') + '/#/options/groups/guilds/' + group._id}
+            );
+          }else{
+            emailVars.push(
+              {name: 'PARTY_NAME': content: group.name},
+              {name: 'PARTY_URL': content: nconf.get('BASE_URL') + '/#/options/groups/party'}
+            )
+          }
+
+          utils.txnEmail(invite, ('invited-' + group.type == 'guild' ? 'guild' : 'party'), emailVars);
+        }
+
         // Have to return whole group and its members for angular to show the invited user
         res.json(results[2]);
         group = uuid = null;
@@ -718,8 +738,9 @@ api.questAccept = function(req, res, next) {
       if (m == user._id) {
         group.quest.members[m] = true;
         group.quest.leader = user._id;
-      } else
+      } else {
         group.quest.members[m] = undefined;
+      }
     });
 
   // Party member accepting the invitation
