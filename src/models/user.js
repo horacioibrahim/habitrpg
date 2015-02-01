@@ -305,7 +305,8 @@ var UserSchema = new Schema({
       //others: {type: Boolean, 'default': true},
       newPM: {type: Boolean, 'default': true},
       wonChallenge: {type: Boolean, 'default': true},
-      giftedGems: {type: Boolean, 'default': true}
+      giftedGems: {type: Boolean, 'default': true},
+      giftedSubscription: {type: Boolean, 'default': true}
     }
   },
   profile: {

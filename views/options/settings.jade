@@ -269,6 +269,11 @@ script(id='partials/options.settings.notifications.html', type="text/ng-template
                 input(type='checkbox', ng-model='user.preferences.emailNotifications.giftedGems', ng-change='set({"preferences.emailNotifications.giftedGems": user.preferences.emailNotifications.giftedGems ? true: false})')
                 span=env.t('giftedGems')
 
+            .checkbox
+              label
+                input(type='checkbox', ng-model='user.preferences.emailNotifications.giftedSubscription', ng-change='set({"preferences.emailNotifications.giftedSubscription": user.preferences.emailNotifications.giftedSubscription ? true: false})')
+                span=env.t('giftedSubscription')
+
             hr
 
             .checkbox

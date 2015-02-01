@@ -73,7 +73,15 @@ exports.createSubscription = function(data, cb) {
     utils.ga.transaction(data.user._id, block.price).item(block.price, 1, data.paymentMethod.toLowerCase() + '-subscription', data.paymentMethod).send();
   }
   data.user.purchased.txnCount++;
-  if (data.gift) members.sendMessage(data.user, data.gift.member, data.gift);
+  if (data.gift){
+    members.sendMessage(data.user, data.gift.member, data.gift);
+    if(data.gift.member.preferences.emailNotifications.giftedSubscription !== false){
+      utils.txnEmail(member, 'gifted-subscription', [
+        {name: 'GIFTER', content: utils.getUserInfo(data.user, ['name']).name},
+        {name: 'X_MONTHS_SUBSCRIPTION', content: months}
+      ]);
+    }    
+  }
   async.parallel([
     function(cb2){data.user.save(cb2)},
     function(cb2){data.gift ? data.gift.member.save(cb2) : cb2(null);}
